@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">WeatherApp_Kotlin</string>
+    <string name="max_temperature">Max temperature</string>
+    <string name="value">Value</string>
+    <string name="refresh">Refresh</string>
+    <string name="can_t">can\'t</string>
+    <string name="min_temperature">Min temperature</string>
+    <string name="wind_speed">Wind Speed</string>
+    <string name="updated">Updated</string>
+    <string name="tempValue"> %1$.2f °C</string>
+    <string name="updatedAt">Updated at %1$d:%2$d</string>
+</resources>
