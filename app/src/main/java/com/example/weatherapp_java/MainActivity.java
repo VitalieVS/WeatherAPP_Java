@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 
 public class MainActivity extends AppCompatActivity {
-    private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/";
+    private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/"; //setting base url
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
