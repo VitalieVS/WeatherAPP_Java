@@ -4,12 +4,13 @@ import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -32,7 +33,11 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+        WindowManager.LayoutParams attrs = getWindow().getAttributes();
+        attrs.flags = WindowManager.LayoutParams.FLAG_FULLSCREEN;
+        getWindow().setAttributes(attrs);
 
         refreshCardView = findViewById(R.id.refreshCardView);
 
@@ -61,7 +66,6 @@ public class MainActivity extends Activity {
         TextView updatedAtView;
         MainActivity currentActivity;
         private String CITY;
-
         private WeakReference<MainActivity> activityReference;
 
         WeatherTask(MainActivity context, String city) {
@@ -76,7 +80,7 @@ public class MainActivity extends Activity {
             currentActivity = activityReference.get();
             if (currentActivity == null || currentActivity.isFinishing()) return;
 
-            mainWindow = (LinearLayout) currentActivity.findViewById(R.id.mainWindow);
+            mainWindow = currentActivity.findViewById(R.id.mainWindow);
             progressBar = currentActivity.findViewById(R.id.loaderView);
             errorText = currentActivity.findViewById(R.id.errorText);
             mainWindow.setVisibility(View.GONE);
@@ -104,7 +108,6 @@ public class MainActivity extends Activity {
             } catch (IOException e) {
                 return e.toString();
             }
-
             return content.toString();
         }
 
@@ -120,7 +123,8 @@ public class MainActivity extends Activity {
                 final JSONObject wind = jsonObj.getJSONObject("wind");
                 final JSONObject weather = jsonObj.getJSONArray("weather")
                         .getJSONObject(0);
-                final String updatedAtText = "Updated At:" + LocalTime.now();
+                final String updatedAtText = "Updated At:" +
+                        LocalTime.now().getHour() + ":" + LocalTime.now().getMinute();
                 final String temp = main.getString("temp") + "°C";
                 final String tempMin = "Min Temp: " + main.getString("temp_min") + "°C";
                 final String tempMax = "Max Temp: " + main.getString("temp_max") + "°C";
