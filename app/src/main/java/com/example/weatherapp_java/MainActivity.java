@@ -50,7 +50,6 @@ public class MainActivity extends Activity {
             }
         });
     }
-
     @SuppressLint("StaticFieldLeak")
     private static class WeatherTask extends AsyncTask<String, Void, String> {
         ProgressBar progressBar;
@@ -89,7 +88,7 @@ public class MainActivity extends Activity {
         }
 
         @Override
-        protected String doInBackground(String... strings) { // nu are acces la GUI
+        protected String doInBackground(String... strings) {
             StringBuilder content = new StringBuilder();
             try {
                 URL url = new URL(
@@ -152,7 +151,7 @@ public class MainActivity extends Activity {
                 mainWindow.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
             } catch (Exception e) {
-                progressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(View.VISIBLE);
                 errorText.setVisibility(View.VISIBLE);
             }
         }
